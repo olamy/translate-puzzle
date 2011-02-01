@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.olamy.puzzle.translate</groupId>
+  <artifactId>translate-puzzle</artifactId>
+  <packaging>pom</packaging>
+  <name>Translate Puzzle</name>
+  <version>1.0.0-SNAPSHOT</version>
+  <scm>
+    <connection>scm:git:git://github.com/olamy/scm-git-test.git/</connection>
+    <developerConnection>scm:git:git@github.com:olamy/scm-git-test.git</developerConnection>
+  </scm>
+  <modules>
+    <module>translate-puzzle-api</module>
+    <module>translate-puzzle-webapp</module>
+  </modules>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.olamy.puzzle.translate</groupId>
+        <artifactId>translate-puzzle</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.8.2</version>      
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <build>
+  <!--
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.0-beta-3</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>  
+    -->
+   <!--
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>  
+        <artifactId>maven-release-plugin</artifactId>       
+        <version>2.2-SNAPSHOT</version>
+        <configuration>
+         <ignoreSnapshots>true</ignoreSnapshots>
+        </configuration> 
+      </plugin>
+    </plugins>
+    --> 
+  </build>
+ 
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.7</version>
+      </plugin>
+    </plugins>
+  </reporting>  
+  
+</project>
