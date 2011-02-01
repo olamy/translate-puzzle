@@ -19,11 +19,13 @@ package org.olamy.puzzle.translate.mapping;
  * under the License.
  */
 
-import org.olamy.puzzle.translate.model.TranslationRequest;
-import org.olamy.puzzle.translate.model.TranslationResponse;
+import org.olamy.puzzle.translate.model.Translation;
 
 public interface TranslationDao
 {
-    TranslationResponse translate( TranslationRequest translationRequest )
+    Translation translate( Translation translationRequest )
+        throws MappingException;
+
+    void reccordTranslation( Translation translation )
         throws MappingException;
 }

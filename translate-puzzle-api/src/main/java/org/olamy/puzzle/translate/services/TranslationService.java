@@ -19,12 +19,14 @@ package org.olamy.puzzle.translate.services;
  * under the License.
  */
 
-import org.olamy.puzzle.translate.model.TranslationRequest;
-import org.olamy.puzzle.translate.model.TranslationResponse;
+import org.olamy.puzzle.translate.model.Translation;
 
 public interface TranslationService
 {
 
-    TranslationResponse translate( TranslationRequest translationRequest )
+    Translation translate( Translation translationRequest )
+        throws TranslationException;
+
+    void reccordTranslation( Translation translation )
         throws TranslationException;
 }

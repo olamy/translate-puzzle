@@ -21,10 +21,13 @@ package org.olamy.puzzle.translate.model;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author Olivier Lamy
  */
-public class TranslationRequest
+@XmlRootElement(name = "TranslationRequest")
+public class Translation
     implements Serializable
 {
     private String sourceText;
@@ -35,13 +38,15 @@ public class TranslationRequest
     private String sourceLanguage;
 
     private String targetLanguage;
+    
+    private String targetText;
 
-    public TranslationRequest()
+    public Translation()
     {
         // noop
     }
 
-    public TranslationRequest( String sourceText, String sourceLanguage, String targetLanguage )
+    public Translation( String sourceText, String sourceLanguage, String targetLanguage )
     {
         this.sourceText = sourceText;
         this.sourceLanguage = sourceLanguage;
@@ -76,5 +81,15 @@ public class TranslationRequest
     public void setTargetLanguage( String targetLanguage )
     {
         this.targetLanguage = targetLanguage;
+    }
+
+    public String getTargetText()
+    {
+        return targetText;
+    }
+
+    public void setTargetText( String targetText )
+    {
+        this.targetText = targetText;
     }
 }
