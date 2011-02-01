@@ -15,7 +15,7 @@
     </dependency>
     <dependency>
       <groupId>org.olamy.puzzle.translate</groupId>
-      <artifactId>translate-puzzle</artifactId>
+      <artifactId>translate-puzzle-api</artifactId>
     </dependency>
   </dependencies>
   
