@@ -92,4 +92,11 @@ public class Translation
     {
         this.targetText = targetText;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Translation [sourceText=" + sourceText + ", sourceLanguage=" + sourceLanguage + ", targetLanguage="
+            + targetLanguage + ", targetText=" + targetText + "]";
+    }
 }
