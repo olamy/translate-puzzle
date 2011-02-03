@@ -15,6 +15,7 @@ public class MockTranslationDao
     public Translation translate( Translation translationRequest )
         throws MappingException
     {
+       log.info( "translation {}", translationRequest );
        translationRequest.setTargetText( "translated " + translationRequest.getSourceText() );
        return translationRequest;
     }

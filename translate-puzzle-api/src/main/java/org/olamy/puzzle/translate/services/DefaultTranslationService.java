@@ -51,6 +51,7 @@ public class DefaultTranslationService
     public Translation translate( Translation translationRequest )
         throws TranslationException
     {
+        log.info( "translation {}", translationRequest );
         // TODO some caching here
         try
         {
