@@ -5,6 +5,7 @@
     <script type="text/javascript" src="jquery-1.4.4.js"></script>
     <script type="text/javascript" src="http://jquery-json.googlecode.com/files/jquery.json-2.2.js"></script>
     <script type="text/javascript" src="js/translate.js"></script>
+    <script type="text/javascript" src="jquery.regex.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.8.9.custom.min.js"></script>
     <link href="css/ui-lightness/jquery-ui-1.8.9.custom.css" rel="stylesheet" type="text/css" media="screen" />
   
@@ -18,6 +19,7 @@
     <div>
       <span class="systran_seg" id="Sp14_s2_o"></span>
     </div>
+    <br/><br/><br/><br/><br/><br/><br/><br/>
     <div>
       <span class="systran_seg" id="Sp14_s3_o"></span>
     </div>
@@ -71,8 +73,8 @@
     	  }
        });   
        
-       $(':regex(id,^[Sp14_]').mouseover(function() {
-     	  alert("over");
+       $("span, id:match('Sp14_s.*_o')").mouseover(function(span) {
+     	  alert("over " + $(this).id);
        });       
        
      });
