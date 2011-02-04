@@ -20,6 +20,7 @@ package org.olamy.puzzle.translate.model;
  */
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -40,7 +41,7 @@ public class Translation
     private String targetLanguage;
     
     private String targetText;
-
+    
     public Translation()
     {
         // noop
@@ -99,4 +100,5 @@ public class Translation
         return "Translation [sourceText=" + sourceText + ", sourceLanguage=" + sourceLanguage + ", targetLanguage="
             + targetLanguage + ", targetText=" + targetText + "]";
     }
+
 }
