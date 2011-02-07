@@ -9,6 +9,10 @@
     <script type="text/javascript" src="js/jquery-ui-1.8.9.custom.min.js"></script>
     <link href="css/ui-lightness/jquery-ui-1.8.9.custom.css" rel="stylesheet" type="text/css" media="screen" />
   
+    <style>
+      .effects-dotted { border: 2px dotted gray; }
+    </style> 
+  
   </head>
 
   <body>
@@ -19,12 +23,12 @@
     <div>
       <span class="systran_seg" id="Sp14_s2_o"></span>
     </div>
-    <br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/>
     <div>
       <span class="systran_seg" id="Sp14_s3_o"></span>
     </div>
-    <span class="systran_seg" id="Sp14_s2_o_src" style="display: none">Beer</span>
-    <span class="systran_seg" id="Sp14_s3_o_src" style="display: none">Wine</span>
+    <span class="systran_seg_src" id="Sp14_s2_o_src" style="display: none">Beer</span>
+    <span class="systran_seg_src" id="Sp14_s3_o_src" style="display: none">Wine</span>
 
 
     <div id="tabs" style="display: none">
@@ -34,7 +38,17 @@
         <li><a href="#tabs-3">Javascript</a></li>
       </ul>
       <div id="tabs-1">
-        <p></p>
+        <p>
+          Source :
+          <input type="text" id="sourceText"/>
+        </p>
+        <p>
+          Target :
+          <input type="text" id="targetText"/>        
+        </p>
+        <p>
+          <button onclick="translateAndNext();" id="translate">Translate</button>
+        </p>
       </div>
       <div id="tabs-2">Coming soon... :-)</div>
       <div id="tabs-3">Coming soon... :-)</div>
@@ -45,36 +59,26 @@
 
 
   <script>
+    var currentSegId;
 	$(document).ready(function() {
 	   var editMode = false;
        $("#tabs").tabs();
-       $( "#editMode, #displayMode" ).button();
-       var trans = new Translation($('#Sp14_s2_o_src').html(),'en', null, null);
-       $.ajax({
-    	   url : '${pageContext.request.contextPath}/rest/TranslationService/translate',
-    	   type : 'POST',
-    	   data : $.toJSON(trans),
-    	   dataType : 'json',
-    	   contentType : 'application/json',
-    	   success : function(transResponse) {
-    		   $('#Sp14_s2_o').html(transResponse.targetText);
-    	  }
+       $( "#editMode, #displayMode , #translate" ).button();
+       $(".systran_seg").each(function() {
+    	   var currentSegId = $(this).attr('id');
+    	   applyTranslation(currentSegId);	   
        });
-       // FIXME use selector #Sp14_s2_o*
-       var trans = new Translation($('#Sp14_s3_o_src').html(),'en', null, null);
-       $.ajax({
-    	   url : '${pageContext.request.contextPath}/rest/TranslationService/translate',
-    	   type : 'POST',
-    	   data : $.toJSON(trans),
-    	   dataType : 'json',
-    	   contentType : 'application/json',
-    	   success : function(transResponse) {
-    		   $('#Sp14_s3_o').html(transResponse.targetText);
-    	  }
-       });   
        
-       $("span, id:match('Sp14_s.*_o')").mouseover(function(span) {
-     	  alert("over " + $(this).id);
+       $(".systran_seg").mouseover(function() {
+     	  if ($('#tabs').is(':visible')) {
+     		 $(".systran_seg").each(function() {
+     			$('#'+currentSegId).removeClass('effects-dotted');
+     		 });
+     		 currentSegId = $(this).attr('id');
+     		 $('#'+currentSegId).addClass('effects-dotted');
+     		 $('#targetText').val( $(this).html() );
+     		 $('#sourceText').val( $('#' + currentSegId + '_src').html() );
+     	  }
        });       
        
      });
@@ -84,6 +88,39 @@
     var hideEditMode = function () {
  	   $('#tabs').hide();
     };	
+    
+    var translateAndNext = function() {
+    	var trans = new Translation($('#sourceText').val(),'en', $('#targetText').val(), 'fr');
+        $.ajax({
+     	   url : '${pageContext.request.contextPath}/rest/TranslationService/reccordTranslation',
+     	   type : 'POST',
+     	   data : $.toJSON(trans),
+     	   dataType : 'json',
+     	   contentType : 'application/json',
+     	   success : function(transResponse) {
+     		  applyTranslation(currentSegId);
+    	   }
+        });    	
+    };
+    
+    var applyTranslation = function(currentSegId) {
+ 	   var sourceText = $('#' + currentSegId + '_src').html(); 
+       var trans = new Translation(sourceText,'en', null, 'fr');
+       $.ajax({
+    	   url : '${pageContext.request.contextPath}/rest/TranslationService/translate',
+    	   type : 'POST',
+    	   data : $.toJSON(trans),
+    	   dataType : 'json',
+    	   contentType : 'application/json',
+    	   success : function(transResponse) {
+    		   if (transResponse == null) {
+    			   $('#' + currentSegId).html(sourceText);
+    		   } else {
+    		     $('#' + currentSegId).html(transResponse.targetText);
+    		   }
+   	       }
+       });    	
+    };
 
   </script>
 </html>

@@ -63,14 +63,22 @@ public class DefaultTranslationService
             throw new TranslationException( e.getMessage(), e );
         }
     }
+
     @POST
     @Path("/reccordTranslation")
     @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
     public void reccordTranslation( Translation translation )
         throws TranslationException
     {
-        // TODO Auto-generated method stub
-        
+        try
+        {
+            translationDao.reccordTranslation( translation );
+        }
+        catch ( MappingException e )
+        {
+            log.error( e.getMessage(), e );
+            throw new TranslationException( e.getMessage(), e );
+        }
     }
 
 }

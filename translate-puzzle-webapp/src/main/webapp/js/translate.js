@@ -17,7 +17,7 @@ var translationOpts = {
 		sourceLanguage: null,
 		targetLanguage: null,
 		targetText: null,
-		initialize : function(sourceText, sourceLanguage, targetLanguage, targetText) {
+		initialize : function(sourceText, sourceLanguage, targetText, targetLanguage) {
 			this.sourceText = sourceText;
 			this.sourceLanguage = sourceLanguage;
 			this.targetLanguage = targetLanguage;
