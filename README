@@ -41,6 +41,11 @@ NOTE the service is also available with xml request/response.
 The translation save service is available at the following path : http://localhost:8080/rest/TranslationService/reccordTranslation
 {"sourceText":"Beer","sourceLanguage":"en","targetLanguage":"fr","targetText":"bières"}
 
+IMPROVEMENT :
+  * move everything (div tabs) externally so applications will have only to one reference the translate.js and this one will add dynamically
+    the tabs element with forms.
+  * add a list box with more target languages.
+
 
 
 
