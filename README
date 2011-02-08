@@ -13,19 +13,17 @@ The source text must be in a element :
 <span class="systran_seg_src" id="Sp14_s2_o_src" style="display: none"></span>
 
 NOTE the syntax with _src happened at the end of both class and id.
-At the loading time, all element with the systran_seg will "scanned" to search the corresponding 
-element with id _src. And if the translation exists it will be replaced with the translation
+At the loading time, all element with the systran_seg will "scanned" to search the corresponding element with id _src. 
+If the translation exists it will be replaced with the translation
 if the translation doesn't exist the source text will be used.
 As it's a POC source text use harcoded language en and target hardcoded fr. 
 
-In the edit mode, a mouseover handler will activate translation of an element and filled some values so the user
-will be able to add/update a translation and to send it to the backend.
+In the edit mode, a mouseover handler will activate translation of an element and filled some values so the user will be able to add/update a translation and to send it to the backend.
 The ui communicates with the server through json REST request.
 
 NOTE : the current implementation saves translation only memory.
 
-Services are defined in the class DefaultTranslationService and exposed in REST tru standard annotations defined in JSR 311 
-with the jersey implementation.
+Services are defined in the class DefaultTranslationService and exposed in REST tru standard annotations defined in JSR 311 with the jersey implementation.
 
 The translate search service is available at the following path : http://localhost:8080/rest/TranslationService/translate 
 
@@ -42,8 +40,7 @@ The translation save service is available at the following path : http://localho
 {"sourceText":"Beer","sourceLanguage":"en","targetLanguage":"fr","targetText":"bières"}
 
 IMPROVEMENT :
-  * move everything (div tabs) externally so applications will have only to one reference the translate.js and this one will add dynamically
-    the tabs element with forms.
+  * move everything (div tabs) externally so applications will have only to one reference the translate.js and this one will add dynamically the tabs element with forms.
   * add a list box with more target languages.
 
 
