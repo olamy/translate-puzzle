@@ -170,18 +170,24 @@
       <artifactId>slf4j-api</artifactId>
       <version>${slf4jVersion}</version>
     </dependency>
-    <!-- wrapper commons-logging -> slf4j : supprimer toute depéndance vers commons-logging -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-      <version>${slf4jVersion}</version>
-    </dependency>
-    <!-- si utilisation de logback wrapper log4j -> slf4j : supprimer toute depéndance vers log4j -->      
+    <!--
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
       <version>${slf4jVersion}</version>
-    </dependency>      
+    </dependency>
+    -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4jVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.12</version>
+    </dependency>
+    <!--
     
     <dependency>
       <groupId>ch.qos.logback</groupId> 
@@ -199,8 +205,10 @@
       <groupId>ch.qos.logback</groupId> 
       <artifactId>logback-access</artifactId> 
       <version>${logbackVersion}</version>      
-    </dependency>  
+    </dependency>
+    -->
   </dependencies>
+
   <build>
 
     <pluginManagement>
@@ -247,7 +255,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>1.0-beta-1</version>
+          <version>1.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
