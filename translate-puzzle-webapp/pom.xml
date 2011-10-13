@@ -8,11 +8,7 @@
   <artifactId>translate-puzzle-webapp</artifactId>
   <packaging>war</packaging>
   <dependencies>
-    <dependency>
-      <groupId>javax.xml.bind</groupId>
-      <artifactId>jaxb-api</artifactId>
-      <scope>provided</scope>
-    </dependency>  
+
     <dependency>
       <groupId>javax.ws.rs</groupId>
       <artifactId>jsr311-api</artifactId>
