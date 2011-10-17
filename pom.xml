@@ -12,6 +12,7 @@
   <modules>
     <module>translate-puzzle-api</module>
     <module>translate-puzzle-webapp</module>
+    <module>translate-puzzle-tomcat</module>
   </modules>
   
   <properties>
@@ -439,7 +440,7 @@
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-site-plugin</artifactId>
-              <version>3.0-beta-3</version>
+              <version>3.0</version>
             </plugin>
           </plugins>
         </pluginManagement>
