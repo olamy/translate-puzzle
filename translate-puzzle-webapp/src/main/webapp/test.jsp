@@ -6,7 +6,11 @@
   <script type="text/javascript" src="js/jquery.regex.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.8.9.custom.min.js"></script>
   <script type="text/javascript" src="js/jQuery.validity.js"></script>
-  <script type="text/javascript" src="js/knockout-1.3.0beta.debug.js"></script>
+  <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+
+  <script type="text/javascript" src="js/jquery.tmpl.js"></script>
+
+
   <script type="text/javascript" src="js/bootstrap-alerts.js"></script>
   <script type="text/javascript" src="js/bootstrap-dropdown.js"></script>
   <script type="text/javascript" src="js/bootstrap-modal.js"></script>
@@ -20,7 +24,7 @@
   <script type="text/javascript" src="js/knockout-1.3.0beta.debug.js"></script>
   <script type="text/javascript" src="js/knockout.mapping-latest.debug.js"></script>
   <script type="text/javascript" src="js/knockout.simpleGrid.js"></script>
-  <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+
 
   <link rel="stylesheet" href="css/jquery.validity.css"/>
   <link rel="stylesheet" href="css/bootstrap.1.3.0.css"/>
@@ -50,6 +54,7 @@
 <body>
 <h2>translations</h2>
 
+
 <div class='liveExample'>
 
   <div data-bind='simpleGrid: gridViewModel'> </div>
@@ -67,6 +72,7 @@
   </button>
 
 </div>
+
 
 <script type="text/html" id="translationsTableTpl">
   <tr>
@@ -113,7 +119,8 @@
             });
             self.translations(mappedTranslations);
         }
-    });
+      }
+    );
 
     this.gridViewModel = new ko.simpleGrid.viewModel({
       data: this.translations,
@@ -128,8 +135,16 @@
           headerText: "target Language",
           rowText: "targetLanguage"}
       ],
-      pageSize: 4
+      pageSize: 2
+
     });
+
+    this.sortByName = function() {
+              this.items.sort(function(a, b) {
+                  return a.name < b.name ? -1 : 1;
+              });
+    };
+
 
   }
 
