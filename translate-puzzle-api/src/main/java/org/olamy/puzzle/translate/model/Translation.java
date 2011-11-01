@@ -19,14 +19,13 @@ package org.olamy.puzzle.translate.model;
  * under the License.
  */
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * @author Olivier Lamy
  */
-@XmlRootElement(name = "TranslationRequest")
+@XmlRootElement( name = "translation" )
 public class Translation
     implements Serializable
 {
@@ -41,6 +40,7 @@ public class Translation
 
     private String targetText;
 
+
     public Translation()
     {
         // noop
@@ -52,6 +52,14 @@ public class Translation
         this.sourceLanguage = sourceLanguage;
         this.targetLanguage = targetLanguage;
     }
+    
+    public Translation( String sourceText, String sourceLanguage, String targetText, String targetLanguage )
+    {
+        this.sourceText = sourceText;
+        this.sourceLanguage = sourceLanguage;
+        this.targetLanguage = targetLanguage;
+        this.targetText = targetText;
+    }    
 
     public String getSourceText()
     {
@@ -102,8 +110,8 @@ public class Translation
 
     public String getId()
     {
-        return new StringBuilder().append( this.sourceText ).append( this.sourceLanguage )
-            .append( this.targetLanguage == null ? "" : this.targetLanguage ).toString();
+        return new StringBuilder().append( this.sourceText ).append( this.sourceLanguage ).append(
+            this.targetLanguage == null ? "" : this.targetLanguage ).toString();
     }
 
 }

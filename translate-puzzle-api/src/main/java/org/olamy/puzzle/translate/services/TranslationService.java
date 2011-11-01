@@ -21,6 +21,8 @@ package org.olamy.puzzle.translate.services;
 
 import org.olamy.puzzle.translate.model.Translation;
 
+import java.util.List;
+
 public interface TranslationService
 {
 
@@ -28,5 +30,14 @@ public interface TranslationService
         throws TranslationException;
 
     void reccordTranslation( Translation translation )
+        throws TranslationException;
+
+    List<Translation> getTranslations()
+        throws TranslationException;
+
+    Translation getTranslation( String id )
+        throws TranslationException;
+
+    void deleteTranslation( String id )
         throws TranslationException;
 }

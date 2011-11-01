@@ -51,14 +51,15 @@ $(document).ready(function() {
    
  });
 var displayEditMode = function () {
-	   $('#tabs').effect('slide');
+	   $('#tabs, #my-tab-content').effect('slide');
 };
 var hideEditMode = function () {
-	   $('#tabs').hide();
+	   $('#tabs, #my-tab-content').hide();
 };	
 
 var translateAndNext = function() {
 	var trans = new Translation($('#sourceText').val(),'en', $('#targetText').val(), 'fr');
+
     $.ajax({
  	   url : pageContext + '/rest/TranslationService/reccordTranslation',
  	   type : 'POST',

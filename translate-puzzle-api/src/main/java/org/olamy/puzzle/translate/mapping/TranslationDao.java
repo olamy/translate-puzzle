@@ -21,6 +21,8 @@ package org.olamy.puzzle.translate.mapping;
 
 import org.olamy.puzzle.translate.model.Translation;
 
+import java.util.List;
+
 public interface TranslationDao
 {
     Translation translate( Translation translationRequest )
@@ -28,4 +30,14 @@ public interface TranslationDao
 
     void reccordTranslation( Translation translation )
         throws MappingException;
+
+    List<Translation> getTranslations()
+        throws MappingException;
+
+    Translation getTranslation( String id )
+        throws MappingException;
+
+    void deleteTranslation( String id )
+            throws MappingException;
+
 }

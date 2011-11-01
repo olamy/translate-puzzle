@@ -19,15 +19,6 @@ package org.olamy.puzzle.translate.services;
  * under the License.
  */
 
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
 import org.olamy.puzzle.translate.mapping.MappingException;
 import org.olamy.puzzle.translate.mapping.TranslationDao;
 import org.olamy.puzzle.translate.model.Translation;
@@ -35,8 +26,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import java.util.List;
+
 @Service
-@Path("TranslationService")
+@Path( "TranslationService" )
 public class DefaultTranslationService
     implements TranslationService
 {
@@ -47,9 +49,9 @@ public class DefaultTranslationService
     private TranslationDao translationDao;
 
     @POST
-    @Path("/translate")
-    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Path( "/translate" )
+    @Produces( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON } )
+    @Consumes( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON } )
     public Translation translate( Translation translationRequest )
         throws TranslationException
     {
@@ -67,8 +69,8 @@ public class DefaultTranslationService
     }
 
     @POST
-    @Path("/reccordTranslation")
-    @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Path( "/reccordTranslation" )
+    @Consumes( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON } )
     public void reccordTranslation( Translation translation )
         throws TranslationException
     {
@@ -82,10 +84,54 @@ public class DefaultTranslationService
             throw new TranslationException( e.getMessage(), e );
         }
     }
-    
-    public String foo()
+
+    @GET
+    @Path( "/getTranslations" )
+    @Produces( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON } )
+    public List<Translation> getTranslations()
+        throws TranslationException
     {
-        return "d";
+        try
+        {
+            return translationDao.getTranslations();
+        }
+        catch ( MappingException e )
+        {
+            log.error( e.getMessage(), e );
+            throw new TranslationException( e.getMessage(), e );
+        }
     }
 
+    @GET
+    @Path( "/getTranslation" )
+    @Produces( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON } )
+    public Translation getTranslation( @QueryParam( "id" ) String id )
+        throws TranslationException
+    {
+        try
+        {
+            return translationDao.getTranslation( id );
+        }
+        catch ( MappingException e )
+        {
+            log.error( e.getMessage(), e );
+            throw new TranslationException( e.getMessage(), e );
+        }
+    }
+
+    @DELETE
+    @Path( "/deleteTranslation" )
+    public void deleteTranslation( @QueryParam( "id" ) String id )
+        throws TranslationException
+    {
+        try
+        {
+            translationDao.deleteTranslation( id );
+        }
+        catch ( MappingException e )
+        {
+            log.error( e.getMessage(), e );
+            throw new TranslationException( e.getMessage(), e );
+        }
+    }
 }
