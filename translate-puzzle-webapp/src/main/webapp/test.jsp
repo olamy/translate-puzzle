@@ -9,6 +9,8 @@
   <script type="text/javascript" src="js/jquery.dataTables.js"></script>
 
   <script type="text/javascript" src="js/jquery.tmpl.js"></script>
+  <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+  <script type="text/javascript" src="js/jquery.tablesorter.pager.js"></script>
 
 
   <script type="text/javascript" src="js/bootstrap-alerts.js"></script>
@@ -28,7 +30,25 @@
 
   <link rel="stylesheet" href="css/jquery.validity.css"/>
   <link rel="stylesheet" href="css/bootstrap.1.3.0.css"/>
+  <style>
+    .dataTables_wrapper {
+    	position: relative;
+    	min-height: 302px;
+    	clear: both;
+    	_height: 302px;
+    	zoom: 1; /* Feeling sorry for IE */
+    }
+    .dataTables_length {
+    	width: 40%;
+    	float: left;
+    }
 
+    .dataTables_filter {
+    	width: 50%;
+    	float: right;
+    	text-align: right;
+    }
+  </style>
 
   <script type="text/html" id="translationsListTemplate">
     <table class='contactsEditor'>
@@ -54,11 +74,11 @@
 <body>
 <h2>translations</h2>
 
+  <div>
+  <table data-bind='simpleGrid: gridViewModel' id="translationsTable" class="zebra-striped" cellspacing="0">
 
-<div class='liveExample'>
-
-  <div data-bind='simpleGrid: gridViewModel'> </div>
-
+  </table>
+  </div>
   <button data-bind='click: function() { items.push({ name: "New item", sales: 0, price: 100 }) }'>
       Add item
   </button>
@@ -71,7 +91,7 @@
       Jump to first page
   </button>
 
-</div>
+
 
 
 <script type="text/html" id="translationsTableTpl">
@@ -94,6 +114,8 @@
 
 </body>
 <script type="text/javascript">
+
+
 
   function translation(sourceLanguage, sourceText, targetLanguage,targetText,ownerViewModel) {
       this.sourceLanguage = ko.observable(sourceLanguage);
@@ -126,13 +148,13 @@
       data: this.translations,
       columns: [
         {
-          headerText: "Source Laguage",
+          headerText: "SourceLanguage",
           rowText: "sourceLanguage"},
         {
-          headerText: "Source Text",
+          headerText: "SourceText",
           rowText: "sourceText"},
         {
-          headerText: "target Language",
+          headerText: "targetLanguage",
           rowText: "targetLanguage"}
       ],
       pageSize: 2
@@ -140,9 +162,9 @@
     });
 
     this.sortByName = function() {
-              this.items.sort(function(a, b) {
-                  return a.name < b.name ? -1 : 1;
-              });
+      this.items.sort(function(a, b) {
+          return a.name < b.name ? -1 : 1;
+      });
     };
 
 
@@ -150,7 +172,12 @@
 
 
   ko.applyBindings(new translationsListViewModel());
-
+  $(function() {
+      $("#translationsTable")//.tablesorter({ sortList: [[1,0]] });
+          .dataTable( {
+              "aaSorting": [[ 1, "desc" ]]
+          } );
+    });
 
 </script>
 

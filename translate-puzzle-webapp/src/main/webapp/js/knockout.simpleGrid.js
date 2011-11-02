@@ -44,7 +44,6 @@
     // Templates used to render the grid
     var templateEngine = new ko.jqueryTmplTemplateEngine();
     templateEngine.addTemplate("ko_simpleGrid_grid", "\
-                    <table class=\"ko-grid\" cellspacing=\"0\">\
                         <thead>\
                             <tr>\
                                 {{each(i, columnDefinition) columns}}\
@@ -60,8 +59,7 @@
                                     {{/each}}\
                                 </tr>\
                             {{/each}}\
-                        </tbody>\
-                    </table>");
+                        </tbody>");
     templateEngine.addTemplate("ko_simpleGrid_pageLinks", "\
                     <div class=\"ko-grid-pageLinks\">\
                         <span>Page:</span>\
