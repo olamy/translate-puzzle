@@ -30,25 +30,7 @@
 
   <link rel="stylesheet" href="css/jquery.validity.css"/>
   <link rel="stylesheet" href="css/bootstrap.1.3.0.css"/>
-  <style>
-    .dataTables_wrapper {
-    	position: relative;
-    	min-height: 302px;
-    	clear: both;
-    	_height: 302px;
-    	zoom: 1; /* Feeling sorry for IE */
-    }
-    .dataTables_length {
-    	width: 40%;
-    	float: left;
-    }
-
-    .dataTables_filter {
-    	width: 50%;
-    	float: right;
-    	text-align: right;
-    }
-  </style>
+  <link rel="stylesheet" href="css/datatable.css">
 
   <script type="text/html" id="translationsListTemplate">
     <table class='contactsEditor'>
@@ -173,11 +155,12 @@
 
   ko.applyBindings(new translationsListViewModel());
   $(function() {
-      $("#translationsTable")//.tablesorter({ sortList: [[1,0]] });
-          .dataTable( {
-              "aaSorting": [[ 1, "desc" ]]
-          } );
+      $("#translationsTable").dataTable(  );
     });
+  $("tfoot input").keyup( function () {
+          /* Filter on the column (the index) of this element */
+          oTable.fnFilter( this.value, $("tfoot input").index(this) );
+      } );
 
 </script>
 
