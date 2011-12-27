@@ -49,14 +49,17 @@
                                 {{each(i, columnDefinition) columns}}\
                                     <th>${ columnDefinition.headerText }</th>\
                                 {{/each}}\
+                                <th>Edit</th>\
                             </tr>\
                         </thead>\
                         <tbody>\
                             {{each(i, row) itemsOnCurrentPage()}}\
-                                <tr class=\"${ i % 2 == 0 ? 'even' : 'odd' }\">\
+                                ////<tr class=\"${ i % 2 == 0 ? 'even' : 'odd' }\">\
+                                <tr>\
                                     {{each(j, columnDefinition) columns}}\
                                         <td>${ typeof columnDefinition.rowText == 'function' ? columnDefinition.rowText(row) : row[columnDefinition.rowText] }</td>\
                                     {{/each}}\
+                                    <td>Edit</td>\
                                 </tr>\
                             {{/each}}\
                         </tbody>");

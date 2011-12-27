@@ -56,12 +56,9 @@
 <body>
 <h2>translations</h2>
 
-  <div>
-  <table data-bind='simpleGrid: gridViewModel' id="translationsTable" class="zebra-striped" cellspacing="0">
+  <table class="zebra-striped" data-bind='simpleGrid: gridViewModel' id="translationsTable"></table>
 
-  </table>
-  </div>
-  <button data-bind='click: function() { items.push({ name: "New item", sales: 0, price: 100 }) }'>
+  <button data-bind='click: addTranslation'>
       Add item
   </button>
 
@@ -76,13 +73,17 @@
 
 
 
-<script type="text/html" id="translationsTableTpl">
-  <tr>
-    <td><input data-bind="value: sourceText" /></td>
-    <td><input data-bind="value: sourceLanguage" /></td>
-    <td><input data-bind="value: targetLanguage" /></td>
-  </tr>
+<script type="text/html" id="translationsEdit">
+  <ul>
+    <li><input data-bind="value: sourceText" /></li>
+    <li><input data-bind="value: sourceLanguage" /></li>
+    <li><input data-bind="value: targetLanguage" /></li>
+  </ul>
 </script>
+
+<div id="editTranslationDiv">
+
+</div>
 
 
 <ul data-bind="template: { name: 'translationsListTpl', foreach: translations }">
@@ -96,8 +97,6 @@
 
 </body>
 <script type="text/javascript">
-
-
 
   function translation(sourceLanguage, sourceText, targetLanguage,targetText,ownerViewModel) {
       this.sourceLanguage = ko.observable(sourceLanguage);
@@ -126,42 +125,48 @@
       }
     );
 
-    this.gridViewModel = new ko.simpleGrid.viewModel({
-      data: this.translations,
-      columns: [
-        {
-          headerText: "SourceLanguage",
-          rowText: "sourceLanguage"},
-        {
-          headerText: "SourceText",
-          rowText: "sourceText"},
-        {
-          headerText: "targetLanguage",
-          rowText: "targetLanguage"}
-      ],
-      pageSize: 2
-
-    });
-
     this.sortByName = function() {
-      this.items.sort(function(a, b) {
+      this.translations.sort(function(a, b) {
           return a.name < b.name ? -1 : 1;
       });
     };
 
+    this.addTranslation = function() {
+      ko.renderTemplate("translationsEdit", this, null, jQuery("#editTranslationDiv"), "replaceNode");
+      //this.translations.push({ sourceLanguage: "", sourceText: "", targetLanguage: "" } );
+    }
+
 
   }
 
+  var viewModel = new translationsListViewModel();
 
-  ko.applyBindings(new translationsListViewModel());
+  viewModel.gridViewModel = new ko.simpleGrid.viewModel({
+    data: this.translations,
+    columns: [
+      {
+        headerText: "SourceLanguage",
+        rowText: "sourceLanguage"},
+      {
+        headerText: "SourceText",
+        rowText: "sourceText"},
+      {
+        headerText: "targetLanguage",
+        rowText: "targetLanguage"}
+    ],
+    pageSize: 2
+
+  });
+
+  ko.applyBindings(viewModel);
+  /*
   $(function() {
       $("#translationsTable").dataTable(  );
     });
   $("tfoot input").keyup( function () {
-          /* Filter on the column (the index) of this element */
           oTable.fnFilter( this.value, $("tfoot input").index(this) );
       } );
-
+  */
 </script>
 
 

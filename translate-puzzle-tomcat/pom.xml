@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <groupId>org.olamy.puzzle.translate</groupId>
     <artifactId>translate-puzzle</artifactId>
@@ -7,6 +9,14 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>translate-puzzle-tomcat</artifactId>
   <packaging>pom</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
+      <version>${slf4jVersion}</version>
+    </dependency>
+  </dependencies>
 
   <build>
     <plugins>
@@ -26,6 +36,14 @@
               <path>/</path>
               <serverXml>src/main/tomcatconf/server.xml</serverXml>
               -->
+              <extraResources>
+                <extraResource>
+                  <directory>${basedir}/src/main/resources</directory>
+                  <includes>
+                    <include>**/log4j.xml</include>
+                  </includes>
+                </extraResource>
+              </extraResources>
               <warRunDependencies>
                 <warRunDependency>
                   <dependency>
@@ -37,11 +55,35 @@
                   <contextPath>/</contextPath>
                 </warRunDependency>
               </warRunDependencies>
+              <extraDependencies>
+                <extraDependency>
+                  <groupId>org.slf4j</groupId>
+                  <artifactId>jul-to-slf4j</artifactId>
+                  <version>${slf4jVersion}</version>
+                </extraDependency>
+                <extraDependency>
+                  <groupId>org.slf4j</groupId>
+                  <artifactId>slf4j-api</artifactId>
+                  <version>${slf4jVersion}</version>
+                </extraDependency>
+                <extraDependency>
+                  <groupId>org.slf4j</groupId>
+                  <artifactId>slf4j-log4j12</artifactId>
+                  <version>${slf4jVersion}</version>
+                </extraDependency>
+                <extraDependency>
+                  <groupId>log4j</groupId>
+                  <artifactId>log4j</artifactId>
+                  <version>1.2.12</version>
+                </extraDependency>
+
+              </extraDependencies>
+
             </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
-  
+
 </project>
