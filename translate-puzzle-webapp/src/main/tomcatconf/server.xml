@@ -19,14 +19,6 @@
 
 <Server port="8010" shutdown="SHUTDOWN">
 
-  <GlobalNamingResources>
-    <!-- Used by Manager webapp -->
-    <Resource name="UserDatabase" auth="Container"
-              type="org.apache.catalina.UserDatabase"
-       description="User database that can be updated and saved"
-           factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
-          pathname="conf/tomcat-users.xml" />
-  </GlobalNamingResources>
 
   <Service name="Catalina">
     <Connector port="8080" keepAliveTimeout="1800000" maxKeepAliveRequests="30000" maxThreads="300" />
@@ -34,8 +26,6 @@
     <Engine name="Catalina" defaultHost="localhost">
       <Valve className="org.apache.catalina.valves.AccessLogValve" 
              resolveHosts="false" pattern="%t-ip:%a-protocol:%H-localPort:%p-path:%U-time:%D ms"/> 
-      <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
-             resourceName="UserDatabase" />
       <Host name="localhost" appBase="webapps" />
     </Engine>
     
