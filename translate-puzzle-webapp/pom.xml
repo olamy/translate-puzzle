@@ -78,6 +78,19 @@
       <groupId>org.olamy.puzzle.translate</groupId>
       <artifactId>translate-puzzle-api</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-jaxrs</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-xc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-core-asl</artifactId>
+    </dependency>
     
     <dependency>
       <groupId>javax.servlet</groupId> 

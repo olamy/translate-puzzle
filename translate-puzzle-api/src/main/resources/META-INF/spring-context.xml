@@ -22,7 +22,13 @@
   -->
   <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 
+  <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+
   <jaxrs:server id="services" address="/">
+
+    <jaxrs:providers>
+      <ref bean="jsonProvider"/>
+    </jaxrs:providers>
 
     <jaxrs:serviceBeans>
       <ref bean="translationService#default"/>

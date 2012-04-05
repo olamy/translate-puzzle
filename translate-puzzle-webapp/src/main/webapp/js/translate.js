@@ -73,7 +73,7 @@ var translateAndNext = function() {
 };
 
 var applyTranslation = function(currentSegId) {
-	   var sourceText = $('#' + currentSegId + '_src').html(); 
+	 var sourceText = $('#' + currentSegId + '_src').html();
    var trans = new Translation(sourceText,'en', null, 'fr');
    $.ajax({
 	   url : pageContext + '/rest/TranslationService/translate',
@@ -87,6 +87,6 @@ var applyTranslation = function(currentSegId) {
 		   } else {
 		     $('#' + currentSegId).html(transResponse.targetText);
 		   }
-	       }
+	   }
    });    	
 };
