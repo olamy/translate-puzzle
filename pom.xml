@@ -23,7 +23,7 @@
     <slf4jVersion>1.6.1</slf4jVersion>
     <logbackVersion>0.9.28</logbackVersion>
     <jersey-version>1.9.1</jersey-version>
-    <cxfVersion>2.5.2</cxfVersion>
+    <cxfVersion>2.6.0</cxfVersion>
     <jacksonVersion>1.9.5</jacksonVersion>
     
     <!-- core maven plugins versions  -->

@@ -27,6 +27,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -34,8 +36,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.Set;
 
 @Service("translationService#default")
 @Path( "TranslationService" )
@@ -48,6 +52,12 @@ public class DefaultTranslationService
     @Inject
     private TranslationDao translationDao;
 
+    @Context
+    protected HttpServletRequest httpServletRequest;
+
+    @Context
+    protected ServletContext servletContext;
+
     @POST
     @Path( "/translate" )
     @Produces( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON } )
@@ -55,7 +65,9 @@ public class DefaultTranslationService
     public Translation translate( Translation translationRequest )
         throws TranslationException
     {
+
         log.info( "translation {}", translationRequest );
+        Set paths = servletContext.getResourcePaths( "/" );
         // TODO some caching here
         try
         {
